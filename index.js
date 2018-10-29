@@ -43,13 +43,7 @@ function transformFilename(file) {
 	});
 }
 
-const getManifestFile = opts => vinylFile.read(opts.path, opts).catch(error => {
-	if (error.code === 'ENOENT') {
-		return new Vinyl(opts);
-	}
-
-	throw error;
-});
+const getManifestFile = opts => Promise.resolve(vinylFile.readSync(opts.path, opts));
 
 const plugin = () => {
 	const sourcemaps = [];
